@@ -14,6 +14,8 @@ use syn::{
 };
 
 
+
+
 pub fn storage_bindings(input: &DeriveInput) -> Result<quote::__private::TokenStream> {
     let name = &input.ident;
 
@@ -77,6 +79,7 @@ pub fn storage_bindings(input: &DeriveInput) -> Result<quote::__private::TokenSt
                 source: Self::SourceAsset,
                 _: AssetId<Self::SourceAsset>,
                 render_device: &mut bevy::ecs::system::SystemParamItem<Self::Param>,
+                _previous_asset: Option<&Self>,
             ) -> Result<Self, bevy::render::render_asset::PrepareAssetError<Self::SourceAsset>> {
                 let count = source.len();
 
@@ -104,9 +107,10 @@ pub fn storage_bindings(input: &DeriveInput) -> Result<quote::__private::TokenSt
                 })
             }
 
-            fn asset_usage(_: &Self::SourceAsset) -> bevy::render::render_asset::RenderAssetUsages {
-                bevy::render::render_asset::RenderAssetUsages::default()
+            fn asset_usage(_: &Self::SourceAsset) -> bevy::asset::RenderAssetUsages {
+                bevy::asset::RenderAssetUsages::default()
             }
+
         }
 
         impl GpuPlanar for #gpu_planar_name {

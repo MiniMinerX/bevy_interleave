@@ -2,7 +2,7 @@ use std::marker::PhantomData;
 
 use bevy::{
     prelude::*,
-    reflect::GetTypeRegistration,
+    reflect::GetTypeRegistration, render::RenderSystems,
 };
 
 use crate::{
@@ -46,7 +46,7 @@ where
         );
         render_app.add_systems(
             bevy::render::Render,
-            queue_gpu_storage_buffers::<R>.in_set(bevy::render::RenderSet::PrepareBindGroups),
+            queue_gpu_storage_buffers::<R>.in_set(RenderSystems::PrepareBindGroups),
         );
     }
 

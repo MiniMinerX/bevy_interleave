@@ -13,6 +13,7 @@ keywords = [
 
 
 [dependencies.bevy]
-version = "0.16"
+version = "0.17.0-dev" 
+git = "https://github.com/bevyengine/bevy.git"
 default-features = false
 features = ["bevy_asset", "bevy_render", "png", "reflect_documentation", "reflect_functions"]
